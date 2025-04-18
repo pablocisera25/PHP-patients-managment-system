@@ -1,6 +1,5 @@
 {
     "name": "pablo/server",
-    "description": "Server for patients managment system",
     "require": {
         "vlucas/phpdotenv": "^5.6"
     },
