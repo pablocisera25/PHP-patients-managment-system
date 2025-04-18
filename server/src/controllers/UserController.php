@@ -2,26 +2,36 @@
 
 namespace App\Controllers; 
 
+use App\models\AuthenticationModel;
+
 class UserController {
+
     public static function register($data = []) {
         header('Content-Type: application/json');
 
-        if(
-            empty($data["username"]) ||
-            empty($data["email"]) ||
-            empty($data["password"]) ||
-            empty($data["role"])
-        ){
+        try{
+            $result = AuthenticationModel::register($data);
+
+            http_response_code(201);
+
+            echo json_encode([
+                "success" => true,
+                "message" => "User has been registered",
+                "data" => $result
+            ]);
+        } catch(\InvalidArgumentException $e){
             http_response_code(400);
-            echo json_encode(["error"=>"Faltan datos en el cuerpo de la petición"]);
-            return;
+            echo json_encode([
+                "success"=>false,
+                "message"=>$e->getMessage()
+            ]);
+        } catch(\RuntimeException $e){
+            http_response_code(500);
+            echo json_encode([
+                "success"=>false,
+                "message"=> $e->getMessage()
+            ]);
         }
-        
-        $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
-
-        $data['password'] = $hashedPassword;
-
-        echo json_encode(["status" => http_response_code(200), "data" => $data]);
     }
 }
 

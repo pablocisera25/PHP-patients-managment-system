@@ -44,5 +44,4 @@ class Connection {
 
         return self::$pdo;
     }
-
 }
