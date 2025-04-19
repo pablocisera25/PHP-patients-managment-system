@@ -1,0 +1,15 @@
+
+@font-face {
+    font-family: "trispace";
+    src: url("../../src/assets/Trispace/Trispace-VariableFont_wdth\,wght.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.nav-link{
+    text-decoration: none;   /* Quita el subrayado */
+    color: inherit;          /* Usa el color del texto del padre */
+    font-weight: 700;
+    font-family: 'trispace', 'Arial Narrow Bold', sans-serif;
+    padding: 10px;
+}

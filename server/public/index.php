@@ -2,6 +2,18 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// Configuración de CORS (debe ir al principio del script)
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
+
+// Manejo de la preflight request (OPTIONS)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 // Obtenemos la URI actual y dividimos
 $URI = $_SERVER['REQUEST_URI'];
 $uri = trim($URI, "/");

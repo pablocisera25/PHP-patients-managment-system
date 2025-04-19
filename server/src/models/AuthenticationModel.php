@@ -67,6 +67,9 @@ class AuthenticationModel {
     # implemenatar login
 
     public static function login(string $email, string $password): array{
+
+        self::init();
+
         if(empty($email) || empty($password)){
             throw new \InvalidArgumentException("Fields required");
         }

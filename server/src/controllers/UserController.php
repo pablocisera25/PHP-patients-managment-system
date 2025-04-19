@@ -33,19 +33,26 @@ class UserController {
             ]);
         }
     }
+
+    public static function login($data = []) {
+        header('Content-Type: application/json');
+
+        try {
+            $email = $data['email'];
+            $password = $data['password'];
+            $result = AuthenticationModel::login($email, $password);
+
+            echo json_encode([
+                "success" => true,
+                "message" => "User logged successfully",
+                "data" => $result
+            ]);
+        } catch (\PDOException $e) {
+            http_response_code(500);
+            echo json_encode([
+                "status"=>false,
+                "message"=> $e->getMessage()
+            ]);
+        }
+    }
 }
-
-
-/**
- * ejemplo de uso de conexion:
- * <?php
- *
- *   use App\config\Connection;
-
- *   $pdo = Connection::exportConnection();
-
-  *  // ¡y listo! ya podés usar $pdo directamente
-   * $stmt = $pdo->query("SELECT * FROM pacientes");
-    *$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
- */
